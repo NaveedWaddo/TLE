@@ -88,39 +88,36 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 void test(){
-    ll n,x,y;
-    cin>>n>>x>>y;
+	int n;
+	cin>>n;
 
-    vector<int>v(n);
+	int arr[n];
+	vector<int>temp(1024,0);
+	for(int i=0; i<n; i++){
+		cin>>arr[i];
+		temp[arr[i]]++;
+	}
 
-    for(int i=0; i<n; i++){
-        cin>>v[i];
-    }
+	int ans = -1;
+	for(int k=1; k<=1023; k++){
+		vector<int>freq(1024,0);
+		for(int i=0; i<n; i++){
+			freq[arr[i]^k]++;
+		}
+		bool flag = true;
+		for(int i=0; i<1024; i++){
+			if(temp[i] != freq[i]){
+				flag = 	false;
+				break;
+			}
+		}
+		if(flag == true){
+			ans = k;
+			break;
+		}
+	}
+	cout<<ans<<endl;
 
-    ll f = 1; //assume f is odd
-
-    for(int i=0; i<n; i++){
-        if(v[i]&1){
-            f = (!f);
-        }
-    }
-
-    if(x&1){
-        if(!((f^y) & 1)){
-            cout<<"Alice"<<endl;
-        }
-        else{
-            cout<<"Bob"<<endl;
-        }
-    }
-    else{
-        if(!((f^y) & 1)){
-            cout<<"Bob"<<endl;
-        }
-        else{
-            cout<<"Alice"<<endl;
-        }
-    }
 }
 
 int main(){
@@ -128,7 +125,7 @@ int main(){
     ll tests=1;
     cin>>tests;
     while(tests--){
-        test();
+    	test();
     }
     return 0;
 }

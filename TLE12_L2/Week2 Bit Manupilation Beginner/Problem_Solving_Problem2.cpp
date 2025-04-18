@@ -87,40 +87,43 @@ template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_pr
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 
 
+
+/*
+	Problem Statement: Given an array of N elements , answer the following Q queries 
+	* Query : L , R
+	* Result : A[L] ^ A[L+1] ^ A[L+2] ^ .... ^ A[R]
+
+	constraints :
+	Q : 1e5
+	N : 1e5
+*/
+
+
 void test(){
-    ll n,x,y;
-    cin>>n>>x>>y;
+	int n;
+	cin>>n;
 
-    vector<int>v(n);
+	vector<int>v(n);
 
-    for(int i=0; i<n; i++){
-        cin>>v[i];
-    }
+	for(int i=0; i<n; i++){
+		cin>>v[i];
+	}
 
-    ll f = 1; //assume f is odd
+	vector<int>pre(n);
+	pre[0]=v[0];
 
-    for(int i=0; i<n; i++){
-        if(v[i]&1){
-            f = (!f);
-        }
-    }
+	for(int i=1; i<n; i++){
+		pre[i] = (pre[i-1] ^ v[i]);	
+	}
 
-    if(x&1){
-        if(!((f^y) & 1)){
-            cout<<"Alice"<<endl;
-        }
-        else{
-            cout<<"Bob"<<endl;
-        }
-    }
-    else{
-        if(!((f^y) & 1)){
-            cout<<"Bob"<<endl;
-        }
-        else{
-            cout<<"Alice"<<endl;
-        }
-    }
+	int q;
+	cin>>q;
+	while(q--){
+		int l,r;
+		cin>>l>>r;
+		l--; r--; //changing to 0-based indexing
+		cout<<(pre[r] ^ (l==0 ? 0:pre[l-1]))<<endl;
+	}
 }
 
 int main(){
@@ -128,7 +131,7 @@ int main(){
     ll tests=1;
     cin>>tests;
     while(tests--){
-        test();
+    	test();
     }
     return 0;
 }

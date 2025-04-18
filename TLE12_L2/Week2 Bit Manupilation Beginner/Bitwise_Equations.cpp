@@ -88,39 +88,16 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 void test(){
-    ll n,x,y;
-    cin>>n>>x>>y;
+	ll n;
+	cin>>n;
 
-    vector<int>v(n);
+	ll a = (1LL<<36) + (1LL<<37);
+	ll b = (1LL<36);
+	ll c = (1LL<<35);
+	ll d = (1LL<36) + (1LL<<35) + n;
 
-    for(int i=0; i<n; i++){
-        cin>>v[i];
-    }
+	cout<<a<<" "<<b<<" "<<c<<" "<<d<<endl;
 
-    ll f = 1; //assume f is odd
-
-    for(int i=0; i<n; i++){
-        if(v[i]&1){
-            f = (!f);
-        }
-    }
-
-    if(x&1){
-        if(!((f^y) & 1)){
-            cout<<"Alice"<<endl;
-        }
-        else{
-            cout<<"Bob"<<endl;
-        }
-    }
-    else{
-        if(!((f^y) & 1)){
-            cout<<"Bob"<<endl;
-        }
-        else{
-            cout<<"Alice"<<endl;
-        }
-    }
 }
 
 int main(){
@@ -128,7 +105,7 @@ int main(){
     ll tests=1;
     cin>>tests;
     while(tests--){
-        test();
+    	test();
     }
     return 0;
 }
